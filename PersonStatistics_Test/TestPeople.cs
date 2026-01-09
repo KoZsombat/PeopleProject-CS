@@ -1,4 +1,5 @@
 using PeopleProject;
+using NUnit.Framework;
 
 namespace TestPeopleProject
 {
@@ -25,7 +26,7 @@ namespace TestPeopleProject
             _testPeople = new[] { person1, person2, person3, person4, person5 };
 
             person1 = new Person(11, "Fanni", 19, true, 55);
-            person2 = new Person(12, "Gábor", 40, false, 45);
+            person2 = new Person(12, "Gábor", 40, true, 45);
             person3 = new Person(13, "Hanna", 21, true, 95);
             person4 = new Person(14, "Isti", 23, true, 38);
             person5 = new Person(15, "Juli", 35, false, 77);
@@ -34,85 +35,123 @@ namespace TestPeopleProject
         }
 
         [Test]
-        public void SetPeople_SetsPeopleArray()
+        public void SetPeople_SetsPeopleArray1()
         {
             var stats = new PeopleStatistics(System.Array.Empty<Person>());
-            Assert.AreEqual(0, stats.GetNumberOfStudents());
+            Assert.That(stats.GetNumberOfStudents(), Is.EqualTo(0));
 
             stats.SetPeople(_testPeople);
-            Assert.AreEqual(3, stats.GetNumberOfStudents());
-            stats.SetPeople(_testPeople2);
-            Assert.AreEqual(3, stats.GetNumberOfStudents());
+            Assert.That(stats.GetNumberOfStudents(), Is.EqualTo(3));
         }
 
         [Test]
-        public void GetAverageAge_ReturnsAverageAge()
+        public void SetPeople_SetsPeopleArray2()
+        {
+            var stats = new PeopleStatistics(System.Array.Empty<Person>());
+            Assert.That(stats.GetNumberOfStudents(), Is.EqualTo(0));
+
+            stats.SetPeople(_testPeople2);
+            Assert.That(stats.GetNumberOfStudents(), Is.EqualTo(4));
+        }
+
+        [Test]
+        public void GetAverageAge_ReturnsAverageAge1()
         {
             var stats = new PeopleStatistics(_testPeople);
             var avg = stats.GetAverageAge();
-            Assert.AreEqual(25, avg);
-            var stats2 = new PeopleStatistics(_testPeople2);
-            var avg2 = stats2.GetAverageAge();
-            Assert.AreEqual(27.6, avg2);
+            Assert.That(avg, Is.EqualTo(25));
         }
 
         [Test]
-        public void GetNumberOfStudents_ReturnsStudentsCount()
+        public void GetAverageAge_ReturnsAverageAge2()
+        {
+            var stats2 = new PeopleStatistics(_testPeople2);
+            var avg2 = stats2.GetAverageAge();
+            Assert.That(avg2, Is.EqualTo(27.6));
+        }
+
+        [Test]
+        public void GetNumberOfStudents_ReturnsStudentsCount1()
         {
             var stats = new PeopleStatistics(_testPeople);
             var count = stats.GetNumberOfStudents();
-            Assert.AreEqual(3, count);
-            var stats2 = new PeopleStatistics(_testPeople2);
-            var count2 = stats2.GetNumberOfStudents();
-            Assert.AreEqual(3, count2);
+            Assert.That(count, Is.EqualTo(3));
         }
 
         [Test]
-        public void GetPersonWithHighestScore_ReturnsCorrectPerson()
+        public void GetNumberOfStudents_ReturnsStudentsCount2()
+        {
+            var stats2 = new PeopleStatistics(_testPeople2);
+            var count2 = stats2.GetNumberOfStudents();
+            Assert.That(count2, Is.EqualTo(4));
+        }
+
+        [Test]
+        public void GetPersonWithHighestScore_ReturnsCorrectPerson1()
         {
             var stats = new PeopleStatistics(_testPeople);
             var result = stats.GetPersonWithHighestScore();
-            Assert.AreEqual("Dóra", result.name);
-            Assert.AreEqual(90, result.score);
-            var stats2 = new PeopleStatistics(_testPeople2);
-            var result2 = stats2.GetPersonWithHighestScore();
-            Assert.AreEqual("Hanna", result2.name);
-            Assert.AreEqual(95, result2.score);
+            Assert.That(result.name, Is.EqualTo("Dóra"));
+            Assert.That(result.score, Is.EqualTo(90));
         }
 
         [Test]
-        public void GetAverageScoreOfStudents_ReturnsAverageStudentScore()
+        public void GetPersonWithHighestScore_ReturnsCorrectPerson2()
+        {
+            var stats2 = new PeopleStatistics(_testPeople2);
+            var result2 = stats2.GetPersonWithHighestScore();
+            Assert.That(result2.name, Is.EqualTo("Hanna"));
+            Assert.That(result2.score, Is.EqualTo(95));
+        }
+
+        [Test]
+        public void GetAverageScoreOfStudents_ReturnsAverageStudentScore1()
         {
             var stats = new PeopleStatistics(_testPeople);
             var avg = stats.GetAverageScoreOfStudents();
-            Assert.AreEqual(70, avg);
-            var stats2 = new PeopleStatistics(_testPeople2);
-            var avg2 = stats2.GetAverageScoreOfStudents();
-            Assert.AreEqual(62.666666666666664, avg2);
+            Assert.That(avg, Is.EqualTo(70));
         }
 
         [Test]
-        public void GetOldestStudent_ReturnsOldestStudent()
+        public void GetAverageScoreOfStudents_ReturnsAverageStudentScore2()
+        {
+            var stats2 = new PeopleStatistics(_testPeople2);
+            var avg2 = stats2.GetAverageScoreOfStudents();
+            Assert.That(avg2, Is.EqualTo(58.25));
+        }
+
+        [Test]
+        public void GetOldestStudent_ReturnsOldestStudent1()
         {
             var stats = new PeopleStatistics(_testPeople);
             var result = stats.GetOldestStudent();
-            Assert.AreEqual("Dóra", result.name);
-            Assert.AreEqual(30, result.age);
-            var stats2 = new PeopleStatistics(_testPeople2);
-            var result2 = stats2.GetOldestStudent();
-            Assert.AreEqual("Isti", result2.name);
-            Assert.AreEqual(23, result2.age);
+            Assert.That(result.name, Is.EqualTo("Dóra"));
+            Assert.That(result.age, Is.EqualTo(30));
         }
 
         [Test]
-        public void IsAnyoneFailing_ReturnsTrueWhenSomeoneFails()
+        public void GetOldestStudent_ReturnsOldestStudent2()
+        {
+            var stats2 = new PeopleStatistics(_testPeople2);
+            var result2 = stats2.GetOldestStudent();
+            Assert.That(result2.name, Is.EqualTo("Gábor"));
+            Assert.That(result2.age, Is.EqualTo(40));
+        }
+
+        [Test]
+        public void IsAnyoneFailing_ReturnsTrueWhenSomeoneFails1()
         {
             var stats = new PeopleStatistics(_testPeople);
             var failing = stats.IsAnyoneFailing();
-            Assert.IsTrue(failing);
+            Assert.That(failing, Is.True);
+        }
+
+        [Test]
+        public void IsAnyoneFailing_ReturnsTrueWhenSomeoneFails2()
+        {
             var stats2 = new PeopleStatistics(_testPeople2);
             var failing2 = stats2.IsAnyoneFailing();
-            Assert.IsTrue(failing2);
+            Assert.That(failing2, Is.True);
         }
     }
 }
