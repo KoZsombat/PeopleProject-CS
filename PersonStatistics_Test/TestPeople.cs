@@ -26,9 +26,9 @@ namespace TestPeopleProject
             _testPeople = new[] { person1, person2, person3, person4, person5 };
 
             person1 = new Person(11, "Fanni", 19, true, 55);
-            person2 = new Person(12, "Gábor", 40, true, 45);
+            person2 = new Person(12, "Gábor", 40, true, 50);
             person3 = new Person(13, "Hanna", 21, true, 95);
-            person4 = new Person(14, "Isti", 23, true, 38);
+            person4 = new Person(14, "Isti", 23, true, 51);
             person5 = new Person(15, "Juli", 35, false, 77);
 
             _testPeople2 = new[] { person1, person2, person3, person4, person5 };
@@ -117,7 +117,7 @@ namespace TestPeopleProject
         {
             var stats2 = new PeopleStatistics(_testPeople2);
             var avg2 = stats2.GetAverageScoreOfStudents();
-            Assert.That(avg2, Is.EqualTo(58.25));
+            Assert.That(avg2, Is.EqualTo(62.75));
         }
 
         [Test]
@@ -151,7 +151,7 @@ namespace TestPeopleProject
         {
             var stats2 = new PeopleStatistics(_testPeople2);
             var failing2 = stats2.IsAnyoneFailing();
-            Assert.That(failing2, Is.True);
+            Assert.That(failing2, Is.False);
         }
     }
 }
